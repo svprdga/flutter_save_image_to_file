@@ -1,0 +1,23 @@
+name: save_image_to_disk
+description: Flutter sample on how to download a file from an URL and save it to a file..
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.2 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  flutter_file_dialog: ^3.0.0
+  http: ^0.13.5
+  path_provider: ^2.0.12
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
