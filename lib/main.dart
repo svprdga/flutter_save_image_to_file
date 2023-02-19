@@ -36,10 +36,13 @@ class MainScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Save image to disk'),
         actions: [
-          IconButton(
-            onPressed: () => _saveImage(context),
-            icon: const Icon(Icons.save),
-          ),
+// [...]
+IconButton(
+  // Call the method we just created
+  onPressed: () => _saveImage(context),
+  icon: const Icon(Icons.save),
+),
+// [...]
         ],
       ),
       body: Center(
@@ -57,37 +60,37 @@ class MainScreen extends StatelessWidget {
     );
   }
 
-  Future<void> _saveImage(BuildContext context) async {
-    String? message;
-    final scaffoldMessenger = ScaffoldMessenger.of(context);
+Future<void> _saveImage(BuildContext context) async {
+  String? message;
+  final scaffoldMessenger = ScaffoldMessenger.of(context);
 
-    try {
-      // Download image
-      final http.Response response = await http.get(Uri.parse(_url));
+  try {
+    // Download image
+    final http.Response response = await http.get(Uri.parse(_url));
 
-      // Get temporary directory
-      final dir = await getTemporaryDirectory();
+    // Get temporary directory
+    final dir = await getTemporaryDirectory();
 
-      // Create an image name
-      var filename = '${dir.path}/image.png';
+    // Create an image name
+    var filename = '${dir.path}/image.png';
 
-      // Save to filesystem
-      final file = File(filename);
-      await file.writeAsBytes(response.bodyBytes);
+    // Save to filesystem
+    final file = File(filename);
+    await file.writeAsBytes(response.bodyBytes);
 
-      // Ask the user to save it
-      final params = SaveFileDialogParams(sourceFilePath: file.path);
-      final finalPath = await FlutterFileDialog.saveFile(params: params);
+    // Ask the user to save it
+    final params = SaveFileDialogParams(sourceFilePath: file.path);
+    final finalPath = await FlutterFileDialog.saveFile(params: params);
 
-      if (finalPath != null) {
-        message = 'Image saved to disk';
-      }
-    } catch (e) {
-      message = 'An error occurred while saving the image';
+    if (finalPath != null) {
+      message = 'Image saved to disk';
     }
-
-    if (message != null) {
-      scaffoldMessenger.showSnackBar(SnackBar(content: Text(message)));
-    }
+  } catch (e) {
+    message = 'An error occurred while saving the image';
   }
+
+  if (message != null) {
+    scaffoldMessenger.showSnackBar(SnackBar(content: Text(message)));
+  }
+}
 }
