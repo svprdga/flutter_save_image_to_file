@@ -1,5 +1,5 @@
 name: save_image_to_disk
-description: Flutter sample on how to download a file from an URL and save it to a file..
+description: Flutter sample on how to download a file from an URL and save it to a file.
 publish_to: 'none'
 version: 1.0.0+1
 
